@@ -11,17 +11,17 @@ interface Restaurant {
 const restaurants: Restaurant[] = [
   {
     id: "1",
-    name: "The Golden Spoon",
+    name: "Blindada",
     description:
       "A fine dining experience with a menu that changes daily based on the freshest ingredients available.",
-    address: "123 Main St. Anytown USA",
+    address: "Diámetro-Ancho-Largo-Watts-Voltaje.",
     score: 4.5,
     ratings: 100,
-    image: "https://source.unsplash.com/480x300/?restaurant&random=1",
+    image: "blindadas.png",
   },
   {
     id: "2",
-    name: "La Piazza",
+    name: "Suncho de Chapa",
     description: "Authentic Italian cuisine in a cozy atmosphere with outdoor seating available.",
     address: "456 Oak Ave. Anytown USA",
     score: 4.2,
@@ -124,10 +124,33 @@ const restaurants: Restaurant[] = [
 
 const sleep = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
 
+//https://docs.google.com/spreadsheets/d/e/2PACX-1vQFLhpzIp2xUCtiuKVIg_aeIHWjztOcpMx2G0OS8oLriS6Be8vWcyAwIjiH3beJmO3vFUVkgjGMUpEU/pub?output=csv
+
 const api = {
   list: async (): Promise<Restaurant[]> => {
-    await sleep(750);
+    // Obtenemos la información de Google Sheets en formato texto y la dividimos por líneas, nos saltamos la primera línea porque es el encabezado
+    const [, ...data] = await fetch(
+      "https://docs.google.com/spreadsheets/d/e/2PACX-1vQFLhpzIp2xUCtiuKVIg_aeIHWjztOcpMx2G0OS8oLriS6Be8vWcyAwIjiH3beJmO3vFUVkgjGMUpEU/pub?output=csv",
+    )
+      .then((res) => res.text())
+      .then((text) => text.split("\n"));
 
+    // Convertimos cada línea en un objeto Restaurant, asegúrate de que los campos no posean `,`
+    const restaurants: Restaurant[] = data.map((row) => {
+      const [id, name, description, address, score, ratings, image] = row.split(",");
+
+      return {
+        id,
+        name,
+        description,
+        address,
+        score: Number(score),
+        ratings: Number(ratings),
+        image,
+      };
+    });
+
+    // Lo retornamos
     return restaurants;
   },
   fetch: async (id: Restaurant["id"]): Promise<Restaurant> => {
