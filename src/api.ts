@@ -26,7 +26,7 @@ const restaurants: Restaurant[] = [
     address: "456 Oak Ave. Anytown USA",
     score: 4.2,
     ratings: 80,
-    image: "https://source.unsplash.com/480x300/?restaurant&random=2",
+    image: "sunchos.png",
   },
   {
     id: "3",
@@ -36,7 +36,7 @@ const restaurants: Restaurant[] = [
     address: "789 Elm St. Anytown USA",
     score: 4.8,
     ratings: 120,
-    image: "https://source.unsplash.com/480x300/?restaurant&random=3",
+    image: "sunchoceramico.png",
   },
   {
     id: "4",
@@ -45,7 +45,7 @@ const restaurants: Restaurant[] = [
     address: "101 Forest Rd. Anytown USA",
     score: 4.0,
     ratings: 60,
-    image: "https://source.unsplash.com/480x300/?restaurant&random=4",
+    image: "cartuchos.png",
   },
   {
     id: "5",

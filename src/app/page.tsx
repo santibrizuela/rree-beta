@@ -26,6 +26,25 @@ export default async function Home() {
               </small>
             </h2>
             <p className="opacity-90">{restaurant.description}</p>
+            <div className="space-x-6 pt-2">
+              <Link key={restaurant.id} href={`/${restaurant.id}`}>
+                <p
+                  className="btn inline-block cursor-pointer rounded-lg border-emerald-300 bg-white p-2 text-center text-base font-bold 
+                            text-red-300 hover:bg-red-700 hover:shadow-none"
+                >
+                  DETAIL
+                </p>
+              </Link>
+
+              <Link href="https://www.wa.link/x0lxo2" target="_blank">
+                <p
+                  className="btn inline-block cursor-pointer rounded-lg border-emerald-300 bg-white p-2 text-center text-base font-bold 
+                            text-emerald-300 hover:bg-emerald-700 hover:shadow-none"
+                >
+                  WHATSAPP
+                </p>
+              </Link>
+            </div>
           </article>
         );
       })}
